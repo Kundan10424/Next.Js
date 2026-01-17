@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-
+import { ErrorWrapper } from "./error-wrapper";
+import "./globals.css";
 export const metadata: Metadata = {
   title: "routing-demo",
   description: "Next.js App Router",
@@ -21,7 +22,7 @@ export default function RootLayout({
           >
             <p>Header</p>
         </header>
-        {children}
+        <ErrorWrapper>{children}</ErrorWrapper>
         <footer
           style={{
             backgroundColor: "grey",
