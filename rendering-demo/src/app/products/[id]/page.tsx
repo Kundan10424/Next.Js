@@ -1,3 +1,5 @@
+export const dynamicParams = false //set this to false to enable static generation
+
 export async function generateStaticParams(){
     return [{id: '1'}, {id: '2'}, {id: '3'}]
 }
