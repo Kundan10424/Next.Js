@@ -5,6 +5,8 @@ import {
     SignInButton, 
     SignOutButton,
     // UserButton
+    SignedIn,
+    SignedOut
 } from "@clerk/nextjs"
 import Link from "next/link"
 export const Navigation = () => {
@@ -16,18 +18,23 @@ export const Navigation = () => {
                         <h1 className="text-xl font-semibold text-foreground">NEXT.Js App</h1>
                     </div>
                     <div className="flex items-center gap-4">
-                        <div className="bg-white rounded-md text-black font-medium hover:bg-gray-300 hover:scale-105 transition duration-300">
-                            <SignInButton mode="modal"/>
-                            
-                        </div>
-                        <div className="bg-white rounded-md text-black font-medium hover:bg-gray-300 hover:scale-105 transition duration-300">
-                            <SignOutButton />
-                            {/* <UserButton /> */}
-                        </div>
-                        <div className="bg-white rounded-md text-black font-medium hover:bg-gray-300 hover:scale-105 transition duration-300">
-                            {/* <UserButton /> */}
-                            <Link href='/user-profile'>Profile</Link>
-                        </div>
+                        
+                        <SignedOut>
+                            <div className="bg-white rounded-md text-black font-medium hover:bg-gray-300 hover:scale-105 transition duration-300">
+                                <SignInButton mode="modal"/>                            
+                            </div>
+                        </SignedOut>
+
+                        <SignedIn>
+                            <div className="bg-white rounded-md text-black font-medium hover:bg-gray-300 hover:scale-105 transition duration-300">
+                                <SignOutButton />
+                                {/* <UserButton /> */}
+                            </div>
+                            <div className="bg-white rounded-md text-black font-medium hover:bg-gray-300 hover:scale-105 transition duration-300">
+                                {/* <UserButton /> */}
+                                <Link href='/user-profile'>Profile</Link>
+                            </div>
+                        </SignedIn>
                      </div>
                 </div>
             </div>
