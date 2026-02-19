@@ -3,13 +3,29 @@
 
 
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import {NextResponse} from 'next/server';
 
 // const isProtectedRoute = createRouteMatcher(["/user-profile"])
 
 const isPublicRoute = createRouteMatcher(["/", "/sign-in(.*)", "/sign-up(.*)"])
 
+const isAdminRoute = createRouteMatcher(["/admin(.*)"])
+
 export default clerkMiddleware(async(auth, req) => {
-  if(!isPublicRoute(req)) await auth.protect()
+
+  const {userId, redirectToSignIn} = await auth()
+
+  if(isAdminRoute(req) && (await auth()).sessionClaims?.metadata.role !== "admin"){
+    // If the user is not an admin, redirect them to the home page or show an error
+    const url = new URL('/', req.url);
+    return NextResponse.redirect(url);
+  }
+
+  if(!userId &&!isPublicRoute(req)){
+    // Added custom login to run before redirecting
+    return redirectToSignIn()
+  } 
+
 });
 
 export const config = {
