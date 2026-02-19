@@ -6,7 +6,8 @@ import {
     SignOutButton,
     // UserButton
     SignedIn,
-    SignedOut
+    SignedOut,
+    SignUpButton
 } from "@clerk/nextjs"
 import Link from "next/link"
 export const Navigation = () => {
@@ -22,6 +23,10 @@ export const Navigation = () => {
                         <SignedOut>
                             <div className="bg-white rounded-md text-black font-medium hover:bg-gray-300 hover:scale-105 transition duration-300">
                                 <SignInButton mode="modal"/>                            
+                            </div>
+
+                            <div className="bg-white rounded-md text-black font-medium hover:bg-gray-300 hover:scale-105 transition duration-300">
+                                <SignUpButton mode="modal"/>                            
                             </div>
                         </SignedOut>
 
